@@ -13,8 +13,8 @@ describe("Token contract", function () {
     it("Deployment should assign the total supply of tokens to the owner", async function () {
         const expectedSupply = ethers.utils.parseUnits("370000000", 18);
         const [owner] = await ethers.getSigners();
-        const DAMEXToken = await ethers.getContractFactory("DAMEXToken");
-        const hardhatToken = await DAMEXToken.deploy();
+        const HugsToken = await ethers.getContractFactory("HugsToken");
+        const hardhatToken = await HugsToken.deploy();
         const ownerBalance = await hardhatToken.balanceOf(owner.address);
         
         expect(await hardhatToken.totalSupply()).to.equal(expectedSupply);
@@ -23,8 +23,8 @@ describe("Token contract", function () {
 
 
     it("Owner can update the metadata", async function () {
-        const DAMEXToken = await ethers.getContractFactory("DAMEXToken");
-        const hardhatToken = await DAMEXToken.deploy();
+        const HugsToken = await ethers.getContractFactory("HugsToken");
+        const hardhatToken = await HugsToken.deploy();
         
         await hardhatToken.updateMetadata("foo", "bar");
         
@@ -35,8 +35,8 @@ describe("Token contract", function () {
 
     it("Others cannot update the metadata", async function () {
         const [owner, user1] = await ethers.getSigners();
-        const DAMEXToken = await ethers.getContractFactory("DAMEXToken");
-        const hardhatToken = await DAMEXToken.deploy();
+        const HugsToken = await ethers.getContractFactory("HugsToken");
+        const hardhatToken = await HugsToken.deploy();
         
         await expect(
             hardhatToken.connect(user1).updateMetadata("foo", "bar")
@@ -46,8 +46,8 @@ describe("Token contract", function () {
 
     it("Burns", async function () {
         const [owner, user1] = await ethers.getSigners();
-        const DAMEXToken = await ethers.getContractFactory("DAMEXToken");
-        const hardhatToken = await DAMEXToken.deploy();
+        const HugsToken = await ethers.getContractFactory("HugsToken");
+        const hardhatToken = await HugsToken.deploy();
   
         const burnedSupply = ethers.utils.parseUnits("369999999", 18);
         const burnedAmount = ethers.utils.parseUnits("1", 18);
